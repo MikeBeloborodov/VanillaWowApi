@@ -35,7 +35,7 @@ You can assign and remove multiple events.
 Events have predetermined arguments that you can use inside of your callback function. In newer versions of WoW handling them can be done by using (...) vararg operator in Lua. But in Vanilla WoW this is  not going to work. </br>
 Every  event comes with 2 arguments: **self**, **event**.
 
-- **self** referes to the frame on which this event was registered. In the example above **self** would refer to exampleFrame.</br>
+- **self** referes to the frame on which this event was registered. In the example above **self** would refer to the exampleFrame.</br>
 - **event** is the name of the event that was fired.
 
 Some events have other arguments that are available inside of callback functions. They have percise  names **arg1**, **arg2**, ... **arg9**, so the maximum is 9 arguments.
@@ -55,7 +55,7 @@ exampleFrame:SetScript("OnEvent",
 
 After running this code in the client and attacking a mob, you will see 3 strings in the chat: "MyFrameName", "UNIT_HEALTH", "target".</br>
 As you can see, I didn't pass any arguments inside my anonymous function, you shouldn't do it, all these arguments are probably available from the closure that was created by the event.</br>
-In the list of events below I will not mention basic 2 arguments (self and event), but they are always there.
+In the list of events below I will not mention self and event as arguments, but they are always there.
 
 Here is a list of known events:
 
