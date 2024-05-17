@@ -107,6 +107,50 @@ Here is a list of known events:
 - **PLAYER_LEAVE_COMBAT**</br>
     Fired when the player leaves combat through death, defeat of opponents, or an ability. Does not fire if a player flees from combat on foot.
 
+- **UPDATE_CHAT_COLOR**</br>
+    Fired when the chat colour needs to be updated. Refer to ChangeChatColor for details on the parameters.
+    - arg1 - chatType (CHANNEL9 etc.)
+    - arg2 - r
+    - arg3 - g
+    - arg4 - b
+
+- **ADDON_LOADED**</br>
+    Fires after an AddOn has been loaded.
+    - arg1 - addOnName ("MyAwesomeAddon")
+
+- **VARIABLES_LOADED**</br>
+    Fired in response to the CVars, Keybindings and other associated "Blizzard" variables being loaded.
+
+- **UPDATE_BINDINGS**</br>
+    Fired when the keybindings are changed. Fired after completion of LoadBindings, SaveBindings, and SetBinding (and its derivatives).
+
+- **UPDATE_MACROS**</br>
+    Called after applying or cancelling changes to a macro's content, name and/or icon.
+
+- **UPDATE_CHAT_WINDOWS**</br>
+    Fired on load when chat settings are available for chat windows.
+
+- **DISPLAY_SIZE_CHANGED**</br>
+
+- **PLAYER_LOGIN**</br>
+    Triggered immediately before PLAYER_ENTERING_WORLD on login and UI Reload, but NOT when entering/leaving instances.
+
+- **PLAYER_ENTERING_WORLD**</br>
+    Fires when the player logs in, /reloads the UI or zones between map instances. Basically whenever the loading screen appears.
+
+- **MINIMAP_UPDATE_ZOOM**</br>
+    Fired when the minimap scaling factor is changed. This happens, generally, whenever the player moves indoors from outside, or vice versa. To test the player's location, compare the minimapZoom and minimapInsideZoom CVars with the current minimap zoom level (see Minimap:GetZoom).
+
+- **UPDATE_BONUS_ACTIONBAR**</br>
+
+- **UPDATE_INVENTORY_ALERTS**</br>
+    Fires whenever an item's durability status becomes yellow (low) or red (broken). Signals that the durability frame needs to be updated. May also fire on any durability status change, even if that change doesn't require an update to the durability frame.
+
+- **PLAYER_AURAS_CHANGED**</br>
+    Called when a buff or debuff is either applied to a unit or is removed from the player. (Further details to follow, study needed).</br>
+    Also fired when you start eating and/or drinking (which really is only a buff being applied like any other).</br>
+    This event is also called when a Druid changes form (or prowl state). arg1 - arg9 are all nil in this case. These args are probably nil for other classes as well. Also, this event is called multiple times per form change.
+
 ## Widgets
 
 ## API
