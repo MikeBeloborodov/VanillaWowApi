@@ -60,28 +60,38 @@ Here is a list of known events:
 - **UNIT_HEALTH**</br>
     Fires when the health of a unit changes.
     - arg1 - source of health change ("target", "player", "mouseover")
+
 - **BAG_UPDATE**</br>
     Fired when a bags inventory changes.
     - arg1 - bagID (default bag is 0)
+
 - **UNIT_INVENTORY_CHANGED**</br>
     Fired when the player equips or unequips an item.
     - arg1 - unitTarget ("player", "target")
+
 - **PLAYER_TARGET_CHANGED**</br>
     This event is fired whenever the player's target is changed, including when the target is lost.
+
 - **UPDATE_MOUSEOVER_UNIT**</br>
     Fired when the mouseover object needs to be updated.</br>
     Fired when the target of the "mouseover" UnitId has changed and is a 3d model. (Does not fire when UnitExists("mouseover") becomes nil, or if you mouse over a unitframe.)
+
 - **UI_ERROR_MESSAGE**</br>
     Fired when the interface creates an error message. These are the red messages that show in the top middle of the screen. "Your inventory is full." is one example.
     - arg1 - message
+
 - **SPELLCAST_FAILED**</br>
     Fired when a spell fails.
+
 - **SPELLCAST_STOP**</br>
     Fired when a spell cast stops.
+
 - **ACTIONBAR_UPDATE_STATE**</br>
     Fired when the state of anything on the actionbar changes. This includes cooldown and disabling.
+
 - **CURRENT_SPELL_CAST_CHANGED**</br>
     Fired when the spell being cast is changed.
+
 - **UNIT_COMBAT**</br>
     Fired when an npc or player participates in combat and takes damage
     - arg1 - unitTarget ("player", "target", ...)
@@ -89,13 +99,13 @@ Here is a list of known events:
     - arg3 - flagText (Critical/Glancing indicator (e.g. CRITICAL, CRUSHING, GLANCING))
     - arg4 - amount (The numeric damage)
     - arg5 - schoolMask (0 - physical; 1 - holy; 2 - fire; 3 - nature; 4 - frost; 5 - shadow; 6 - arcane)
+
 - **PLAYER_ENTER_COMBAT**</br>
     Fired when a player engages auto-attack. Note that firing a gun or a spell, or getting aggro, does NOT trigger this event.</br>
     PLAYER_ENTER_COMBAT and PLAYER_LEAVE_COMBAT are for *MELEE* combat only. They fire when you initiate autoattack and when you turn it off. However, any spell or ability that does not turn on autoattack does not trigger it. Nor does it trigger when you get aggro.
+
 - **PLAYER_LEAVE_COMBAT**</br>
     Fired when the player leaves combat through death, defeat of opponents, or an ability. Does not fire if a player flees from combat on foot.
-
-
 
 ## Widgets
 
