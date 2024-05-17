@@ -2,7 +2,9 @@
 
 It's hard to come by any old WoW API documentation, only bits and pieces here and there. So I've decided to slowly fill this README with all the things that I come across in Vanilla WoW API.
 
-It is by far no the best or exhaustive documentation, and you should not refer to it as an official one. If you have any qustions or if you want to contribute, please be welcome and open an issue or a pull request.
+There are a lot of websites and resources with similar information, but it's often mixed with newer versions of API. Before adding anything to this document I try it in the game to see if it's working \  has right arguments \ functions etc.
+
+It is by far not the best or exhaustive documentation, and you should not refer to it as an official one. If you have any qustions or if you want to contribute, please be welcome and open an issue or a pull request.
 
 ## Navigation:
 
@@ -150,6 +152,124 @@ Here is a list of known events:
     Called when a buff or debuff is either applied to a unit or is removed from the player. (Further details to follow, study needed).</br>
     Also fired when you start eating and/or drinking (which really is only a buff being applied like any other).</br>
     This event is also called when a Druid changes form (or prowl state). arg1 - arg9 are all nil in this case. These args are probably nil for other classes as well. Also, this event is called multiple times per form change.
+
+- **QUEST_LOG_UPDATE**</br>
+    Fires when the quest log updates.
+
+- **PET_BAR_UPDATE**</br>
+    Fired whenever the pet bar is updated and its GUI needs to be re-rendered/refreshed.
+
+- **UPDATE_FACTION**</br>
+    Fired when your character's reputation of some faction has changed.
+
+- **UPDATE_LFG_TYPES**</br>
+
+- **SKILL_LINES_CHANGED**</br>
+    Fired when the content of the player's skill list changes. It only fires for major changes to the list, such as learning or unlearning a skill or raising one's level from Journeyman to Master. It doesn't fire for skill rank increases.
+
+- **UPDATE_INSTANCE_INFO**</br>
+    Fired when data from RequestRaidInfo is available.
+
+- **UPDATE_TICKET**</br>
+    Fires when information about an active GM ticket changes or becomes available.
+    - arg1 - ?
+    - arg2 - ?
+    - arg3 - ?
+    - arg4 - ?
+    - arg5 - ?
+    - arg6 - ?
+    - arg7 - ?
+
+- **UPDATE_PENDING_MAIL**</br>
+    Fires when there is pending mail.
+
+- **MEETINGSTONE_CHANGED**</br>
+
+- **CURSOR_UPDATE**</br>
+    Fired when the player right-clicks terrain, and on mouseover before UPDATE_MOUSEOVER_UNIT and on mouseout after UPDATE_MOUSEOVER_UNIT. This excludes doodads, player characters, and NPCs that lack interaction.
+
+- **SPELL_UPDATE_USABLE**</br>
+    This event is fired when a spell becomes "useable" or "unusable".
+
+- **CHAT_MSG_SPELL_FAILED_LOCALPLAYER**</br>
+    Fired when you fail to successfully cast a spell, for one of several reasons. arg1 is the full combat chat text and includes the reason. Examples: You fail to cast Heal: Interrupted. You fail to perform Bear Form: Not enough mana.
+    - arg1 - full combat chat text
+    - arg2 - ?
+    - arg3 - ?
+    - arg4 - ?
+    - arg5 - ?
+    - arg6 - ?
+    - arg7 - ?
+    - arg8 - ?
+    - arg9 - ?
+
+- **ACTIONBAR_UPDATE_COOLDOWN**</br>
+    Fired when the cooldown for an actionbar or inventory slot starts or stops. Also fires when you log into a new area.
+    
+- **SPELL_UPDATE_COOLDOWN**</br>
+    This event is fired immediately whenever you cast a spell, as well as every second while you channel spells.</br>
+    The spell you cast doesn't need to have any explicit "cooldown" of its own, since this event also triggers off of anything that incurs a GCD (global cooldown). In other words, it basically fires whenever you cast any spell or channel any spell.</br>
+    (It may possibly even trigger from spells that are "off the GCD" and which don't have any cooldown of their own; but there's no way to verify that, since all spells in game that are "off the GCD" are special class "burst" abilities with long cooldowns.)</br>
+    It's worth noting that this event does NOT fire when spells finish their cooldown!</br>
+
+- **ITEM_LOCK_CHANGED**</br>
+    Fires when the "locked" status on a container or inventory item changes, usually from but not limited to Pickup functions to move items.
+    - arg1 - when changing items in bags it's "LeftButton" (?)
+
+- **PLAYER_REGEN_DISABLED**</br>
+    Fired whenever you enter combat, as normal regen rates are disabled during combat. This means that either you are in the hate list of a NPC or that you've been taking part in a pvp action (either as attacker or victim).
+    
+- **PLAYER_REGEN_ENABLED**</br>
+    Fired after ending combat, as regen rates return to normal. Useful for determining when a player has left combat. This occurs when you are not on the hate list of any NPC, or a few seconds after the latest pvp attack that you were involved with.
+
+- **UNIT_FLAGS**</br>
+    Fired when entering combat. Need more info.
+    - arg1 - unitTarget ("player", "target", ...)
+
+- **CHAT_MSG_COMBAT_HOSTILE_DEATH**</br>
+    Fired when you fail to successfully cast a spell, for one of several reasons. arg1 is the full combat chat text and includes the reason. Examples: You fail to cast Heal: Interrupted. You fail to perform Bear Form: Not enough mana.
+    - arg1 - Chat message (eg: "Snowshow Rabbit dies." or "You have slain Snowshow Rabbit!")
+    - arg2 - ?
+    - arg3 - ?
+    - arg4 - ?
+    - arg5 - ?
+    - arg6 - ?
+    - arg7 - ?
+    - arg8 - ?
+    - arg9 - ?
+
+- **CHAT_MSG_SPELL_SELF_DAMAGE**</br>
+    Fired whenever you cast a harmful spell, be it direct damage or debuff of any kind, be it Warrior's taunt or DoT. arg1 holds the exact same string that is posted to the Combat Log. (eg. "Your Fireball hits Snivvle for 842.")</br>
+    Also fired when your spell does not actually take effect; ie. if it is resisted, or if the target is immune. A "resist" message is "Your Banish was resisted by Felguard Elite." while an "immune" message is of the format "Your Fire Blast failed. Firelord is immune."
+    - arg1 - Chat message (eg: "Your Fireball hits Snivvle for 842.")
+    - arg2 - ?
+    - arg3 - ?
+    - arg4 - ?
+    - arg5 - ?
+    - arg6 - ?
+    - arg7 - ?
+    - arg8 - ?
+    - arg9 - ?
+
+- **CHAT_MSG_SPELL_DAMAGESHIELDS_ON_SELF**</br>
+    Fired when a buff (or possibly item) damages an opponent in response to an action... IE Thorns.
+
+- **WORLD_MAP_UPDATE**</br>
+    Fired when the world map should be updated.</br>
+    When entering a battleground, this event won't fire until the zone is changed (i.e. in WSG when you walk outside of Warsong Lumber Mill or Silverwing Hold) --Salanex
+
+- **ZONE_CHANGED**</br>
+    Fires when the player enters an outdoors subzone.
+
+- **MINIMAP_ZONE_CHANGED**</br>
+    Fired whenever the text above the Minimap changes, i.e. each time the player changes the area or the zone in the current area.
+
+- **UNIT_ENERGY**</br>
+    Fired whenever a units energy is affected.
+    - arg1 - unitId ("player")
+
+- **ACTIONBAR_UPDATE_USABLE**</br>
+    Fired when something in the actionbar or your inventory becomes usable (after eating or drinking a potion, or entering/leaving stealth; for example). This is affected by rage/mana/energy available, but not by range.
 
 ## Widgets
 
