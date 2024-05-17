@@ -35,10 +35,10 @@ You can assign and remove multiple events.
 Events have predetermined arguments that you can use inside of your callback function. In newer versions of WoW handling them can be done by using (...) vararg operator in Lua. But in Vanilla WoW this is  not going to work. </br>
 Every  event comes with 2 arguments: **self**, **event**.
 
-**self** referes to the frame on which this event was registered. In the example above **self** would refer to exampleFrame.</br>
-**event** is the name of the event that was fired.
+- **self** referes to the frame on which this event was registered. In the example above **self** would refer to exampleFrame.</br>
+- **event** is the name of the event that was fired.
 
-Some events have other arguments that are available. They have percise  names **arg1**, **arg2**, ... **arg9**, so the maximum is 9 arguments.
+Some events have other arguments that are available inside of callback functions. They have percise  names **arg1**, **arg2**, ... **arg9**, so the maximum is 9 arguments.
 
 For example, **UNIT_HEALTH** event has 3 arguments: self, event, arg1. Let's use them in the example below:</br>
 ```Lua
