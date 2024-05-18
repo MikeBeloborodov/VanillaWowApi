@@ -251,6 +251,55 @@ Here is a list of known events:
     - arg8 - ?
     - arg9 - ?
 
+- **CHAT_MSG_SYSTEM**</br>
+    Fired when a system chat message (they are displayed in yellow) is received.</br>
+    Be very careful with assuming when the event is actually sent. For example, "Quest accepted: Quest Title" is sent before the quest log updates, so at the time of the event the player's quest log does not yet contain the quest. Similarly, "Quest Title completed." is sent before the quest is removed from the quest log, so at the time of the event the player's quest log still contains the quest.
+    - arg1 - text
+    - arg2 - ?
+    - arg3 - ?
+    - arg4 - ?
+    - arg5 - ?
+    - arg6 - ?
+    - arg7 - ?
+    - arg8 - ?
+    - arg9 - ?
+
+- **CHAT_MSG_CHANNEL_NOTICE**</br>
+    Fired when you enter or leave a chat channel (or a channel was recently throttled).
+    - arg1 - text ("YOU_CHANGED" if you joined a channel, or "YOU_LEFT" if you left, or "THROTTLED" if channel was throttled.)
+    - arg2 - ?
+    - arg3 - ?
+    - arg4 - channelName (Channel name with channelIndex, e.g. "2. Trade - City")
+    - arg5 - ?
+    - arg6 - ?
+    - arg7 - zoneChannelID (The static ID of the zone channel, e.g. 1 for General, 2 for Trade and 22 for LocalDefense. [4])
+    - arg8 - channelIndex (Channel index, this usually is related to the order in which you joined each channel.)
+    - arg9 - channelBaseName (Channel name without the number, e.g. "Trade - City")
+
+- **CHAT_MSG_COMBAT_SELF_HITS**</br>
+    Fired when a you hit a creature. Also called when you hurt yourself by falling, drowning or burning on a campfire.
+    - arg1 - text (Chat message)
+    - arg2 - ?
+    - arg3 - ?
+    - arg4 - ?
+    - arg5 - ?
+    - arg6 - ?
+    - arg7 - ?
+    - arg8 - ?
+    - arg9 - ?
+
+- **CHAT_MSG_COMBAT_XP_GAIN**</br>
+    Fires when you gain XP from killing a creature or finishing a quest. Does not fire if you gain no XP from killing a creature.
+    - arg1 - text (e.g. "Rockjaw Invader dies, you gain 44 experience.")
+    - arg2 - ?
+    - arg3 - ?
+    - arg4 - ?
+    - arg5 - ?
+    - arg6 - ?
+    - arg7 - ?
+    - arg8 - ?
+    - arg9 - ?
+
 - **CHAT_MSG_SPELL_DAMAGESHIELDS_ON_SELF**</br>
     Fired when a buff (or possibly item) damages an opponent in response to an action... IE Thorns.
 
@@ -270,6 +319,119 @@ Here is a list of known events:
 
 - **ACTIONBAR_UPDATE_USABLE**</br>
     Fired when something in the actionbar or your inventory becomes usable (after eating or drinking a potion, or entering/leaving stealth; for example). This is affected by rage/mana/energy available, but not by range.
+
+- **TABARD_CANSAVE_CHANGED**</br>
+    Fired when it is possible to save a tabard.
+
+- **PLAYER_GUILD_UPDATE**</br>
+    This appears to be fired when a player is gkicked, gquits, etc.
+    - arg1 - unitId ("player")
+
+- **LANGUAGE_LIST_CHANGED**</br>
+
+- **UPDATE_SHAPESHIFT_FORMS**</br>
+    Fired when the available set of forms changes (i.e. on skill gain)
+
+- **SPELLS_CHANGED**</br>
+    Fires when spells in the spellbook change in any way. Can be trivial (e.g.: icon changes only), or substantial (e.g.: learning or unlearning spells/skills).</br>
+    In prior game versions, this event also fired every time the player navigated the spellbook (swapped pages/tabs), since that caused UpdateSpells to be called which in turn always triggered a SPELLS_CHANGED event. However, that API has been removed since Patch 4.0.1.
+
+- **UNIT_NAME_UPDATE**</br>
+    Fired when a unit's name changes.
+    - arg1 - unitId ("player")
+
+- **PLAYER_FLAGS_CHANGED**</br>
+    This event fires when a Unit's flags change (e.g. /afk, /dnd).</br>
+    WoW condenses simultaneous flag changes into a single event. If you are currently AFK and not(DND) but you type /dnd you'll see two Chat Log messages ("You are no longer AFK" and "You are now DND: Do Not Disturb") but you'll only see a single PLAYER_FLAGS_CHANGED event.
+    - arg1 - unitId ("player")
+
+- **PLAYER_UPDATE_RESTING**</br>
+    Fired when the player starts or stops resting, i.e. when entering/leaving inns/major towns.
+
+- **ZONE_CHANGED_NEW_AREA**</br>
+    Fires when the player enters a new zone.</br>
+    For example this fires when moving from Duskwood to Stranglethorn Vale or Durotar into Orgrimmar.</br>
+    In interface terms, this is anytime you get a new set of channels.
+
+- **UPDATE_WORLD_STATES**</br>
+    Fired within Battlefields when certain things occur such as a flag being captured.</br>
+    Also seen in the outdoor world occasionlly, but it's not clear what triggers it.
+
+- **FRIENDLIST_UPDATE**</br>
+    Fired when...
+    - You log in
+    - Open the friends window (twice)
+    - Switch from the ignore list to the friend's list
+    - Switch from the guild, raid, or who tab back to the friends tab (twice)
+    - Add a friend
+    - Remove a friend
+    - Friend comes online
+    - Friend goes offline
+
+- **IGNORELIST_UPDATE**</br>
+    Fires twice when a player is added or removed from the ignore list.
+
+- **PLAYER_ALIVE**</br>
+    Fired when the player releases from death to a graveyard; or accepts a resurrect before releasing their spirit.</br>
+    Does not fire when the player is alive after being a ghost. PLAYER_UNGHOST is triggered in that case.
+
+- **PLAYER_UNGHOST**</br>
+    Fired when the player is alive after being a ghost.</br>
+    The player is alive when this event happens. Does not fire when the player is resurrected before releasing. PLAYER_ALIVE is triggered in that case.</br>
+    Fires after one of:
+    - Performing a successful corpse run and the player accepts the 'Resurrect Now' box.
+    - Accepting a resurrect from another player after releasing from a death.
+    - Zoning into an instance where the player is dead.
+    - When the player accept a resurrect from a Spirit Healer.
+    - You log in
+
+- **ACTIONBAR_SLOT_CHANGED**</br>
+    Fired when any actionbar slot's contents change; typically the picking up and dropping of buttons.M</br>
+    On 4/24/2006, Slouken stated "ACTIONBAR_SLOT_CHANGED is also sent whenever something changes whether or not the button should be dimmed. The first argument is the slot which changed." This means actions that affect the internal fields of action bar buttons also generate this event for the affected button(s). Examples include the Start and End of casting channeled spells, casting a new buff on yourself, and the cancellation or expiration of a buff on yourself.
+    - arg1 - slot (number)
+
+- **UNIT_PORTRAIT_UPDATE**</br>
+    Fired when a units portrait changes.
+    - arg1 - unitId ("player")
+
+- **UNIT_MODEL_CHANGED**</br>
+    Fired when the unit's 3d model changes.
+    - arg1 - unitId ("player")
+
+- **PLAYER_XP_UPDATE**</br>
+    Fired when the player's XP is updated (due quest completion or killing).
+    - arg1 - unitTarget ("player")
+
+- **PLAYER_COMBO_POINTS**</br>
+    Fired when your combo points change.
+
+- **UNIT_AURA**</br>
+    Fires when a buff, debuff, status, or item bonus was gained by or faded from an entity (player, pet, NPC, or mob.)
+    - arg1 - unitTarget ("player")
+
+- **UPDATE_EXHAUSTION**</br>
+    Fired when your character's XP exhaustion (i.e. the amount of your character's rested bonus) changes. Use GetXPExhaustion to query the current value.
+
+- **COMBAT_TEXT_UPDATE**</br>
+    Fired when the currently watched entity (as set by the CombatTextSetActiveUnit function) takes or avoids damage, receives heals, gains mana/energy/rage, etc. This event is used by Blizzard's floating combat text addon.
+    - arg1 - combatTextType ("DAMAGE", "SPELL_DAMAGE", "DAMAGE_CRIT"...)
+    - arg2 - amount (number)
+
+- **PLAYER_MONEY**</br>
+    Fired whenever the player gains or loses money.</br>
+    To get the amount of money earned/lost, you'll need to save the return value from GetMoney from the last time PLAYER_MONEY fired and compare it to the new return value from GetMoney.
+
+- **MERCHANT_SHOW**</br>
+    Fired when the merchant frame is shown.
+
+- **MERCHANT_UPDATE**</br>
+    Fired when a merchant updates.
+
+- **MERCHANT_CLOSED**</br>
+    Fired when a merchant frame closes. (Called twice).
+
+- **LOOT_CLOSED**</br>
+    Fired when a player ceases looting a corpse. Note that this will fire before the last CHAT_MSG_LOOT event for that loot.
 
 ## Widgets
 
